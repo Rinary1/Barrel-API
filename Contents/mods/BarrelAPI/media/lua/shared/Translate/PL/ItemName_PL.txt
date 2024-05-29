@@ -1,0 +1,5 @@
+ItemName_PL = {
+    ItemName_BarrelAPI.LargePetrolCan = "Pusty duzy kanister",
+    ItemName_BarrelAPI.LargePetrolCanFull = "Duzy kanister z benzyn",
+    ItemName_BarrelAPI.LargePetrolCanWater = "Duzy kanister z woda",
+}

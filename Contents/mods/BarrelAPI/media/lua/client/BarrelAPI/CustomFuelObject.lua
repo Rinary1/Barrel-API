@@ -1,5 +1,5 @@
-local Utils = require("FuelAPI/Utils");
-local AddFuelIntoCustomObjectAction = require("FuelAPI/AddFuelIntoCustomObjectAction");
+local Utils = require("BarrelAPI/Utils");
+local AddFuelIntoCustomObjectAction = require("BarrelAPI/AddFuelIntoCustomObjectAction");
 
 ---@class CustomFuelObject
 local CustomFuelObject = ISBaseObject:derive("CustomFuelObject");
@@ -86,7 +86,7 @@ function CustomFuelObject:new(isoObject)
                 o.textureName = isoObject:getTextureName();
 
                 if not props:Val("fuelAmount") then
-                    o.fuelCapacity = SandboxVars.FuelAPI.BarrelMaxCapacity or 400;
+                    o.fuelCapacity = SandboxVars.BarrelAPI.BarrelMaxCapacity or 400;
                 else
                     o.fuelCapacity = tonumber(props:Val("fuelAmount"));
                 end
@@ -94,8 +94,8 @@ function CustomFuelObject:new(isoObject)
                 if modData and not modData.instanced then
                     modData.instanced = true;
                     modData.fuelAmount = -1; -- set empty & bypass randomization from game engine
-                    if SandboxVars.FuelAPI.BarrelRandomQuantityPercent ~= 0 then
-                        local randomAmount = ZombRand( o.fuelCapacity * SandboxVars.FuelAPI.BarrelRandomQuantityPercent );
+                    if SandboxVars.BarrelAPI.BarrelRandomQuantityPercent ~= 0 then
+                        local randomAmount = ZombRand( o.fuelCapacity * SandboxVars.BarrelAPI.BarrelRandomQuantityPercent );
                         if randomAmount == 0 then randomAmount = -1; end
                         modData.fuelAmount = randomAmount;
                     end
@@ -133,8 +133,18 @@ local function onFillWorldObjectContextMenu(player, context, worldobjects, test)
         local tooltip = ISToolTip:new();
         tooltip:setName(petrolcan:getDisplayName());
         local tx = getTextManager():MeasureStringX(tooltip.font, getText("ContextMenu_FuelName") .. ":") + 20;
-        local capacity = 1 / petrolcan:getUseDelta();
-        local fuelAmount = capacity * petrolcan:getUsedDelta();
+		local capacity;
+		if petrolcan:hasTag("EmptyPetrol") then
+			capacity = 0;
+		elseif not petrolcan:hasTag("EmptyPetrol") then
+			capacity = 1 / petrolcan:getUseDelta();
+		end
+		local fuelAmount
+		if petrolcan:hasTag("EmptyPetrol") then
+			fuelAmount = 0;
+		elseif not petrolcan:hasTag("EmptyPetrol") then
+			fuelAmount = capacity * petrolcan:getUsedDelta();
+		end
         if fuelAmount == -1 then fuelAmount = 0; end
         tooltip:setTexture(petrolcan:getTexture():getName());
         tooltip.description = string.format("%s: <SETX:%d> %d / %d", getText("ContextMenu_FuelName"), tx, fuelAmount, capacity);

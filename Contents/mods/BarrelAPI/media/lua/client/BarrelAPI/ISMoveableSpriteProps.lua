@@ -1,7 +1,7 @@
 require 'Moveables/ISMoveableSpriteProps';
 
-local FuelAPIUtils = require("FuelAPI/Utils");
-local CustomFuelObject = require("FuelAPI/CustomFuelObject");
+local BarrelAPIUtils = require("BarrelAPI/Utils");
+local CustomFuelObject = require("BarrelAPI/CustomFuelObject");
 
 local ISMoveableSpriteProps_canPickUpMoveableInternal = ISMoveableSpriteProps.canPickUpMoveableInternal;
 function ISMoveableSpriteProps:canPickUpMoveableInternal( _character, _square, _object, _isMulti, ... )
@@ -10,7 +10,7 @@ function ISMoveableSpriteProps:canPickUpMoveableInternal( _character, _square, _
     if instanceof(_object, "IsoObject") then
         local customFuelObject = CustomFuelObject:new(_object);
         if customFuelObject then
-            if customFuelObject:getFuelAmount() > 0 and not SandboxVars.FuelAPI.BarrelCanPickupFull then
+            if customFuelObject:getFuelAmount() > 0 and not SandboxVars.BarrelAPI.BarrelCanPickupFull then
                 canPickUp = false;
             end
         end
@@ -28,7 +28,7 @@ function ISMoveableSpriteProps:getInfoPanelDescription( _square, _object, _playe
         if customFuelObject then
             infoTable = ISMoveableSpriteProps.addLineToInfoTable( infoTable, getText("ContextMenu_FuelName") .. ":", 255, 255, 255, customFuelObject:getFuelAmount() .. "/" .. customFuelObject.fuelCapacity, 100, 255, 0 );
 
-            if customFuelObject:getFuelAmount() > 0 and not SandboxVars.FuelAPI.BarrelCanPickupFull then
+            if customFuelObject:getFuelAmount() > 0 and not SandboxVars.BarrelAPI.BarrelCanPickupFull then
                 infoTable = ISMoveableSpriteProps.addLineToInfoTable( infoTable, "- "..getText("IGUI_BarrelHasFuel"), 255, 0, 0 );
             end
         end
@@ -42,7 +42,7 @@ function ISMoveableSpriteProps:pickUpMoveableInternal( _character, _square, _obj
     local data;
 
     local customFuelObject = CustomFuelObject:new(_object);
-    if customFuelObject and SandboxVars.FuelAPI.BarrelCanPickupFull then
+    if customFuelObject and SandboxVars.BarrelAPI.BarrelCanPickupFull then
         local objModData = _object:getModData();
         for k, v in pairs(objModData) do
             data = data or {};

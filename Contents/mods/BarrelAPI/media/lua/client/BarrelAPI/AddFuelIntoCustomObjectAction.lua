@@ -1,6 +1,6 @@
 require "TimedActions/ISBaseTimedAction";
 
-local Utils = require("FuelAPI/Utils");
+local Utils = require("BarrelAPI/Utils");
 
 local AddFuelIntoCustomObjectAction = ISBaseTimedAction:derive("AddFuelIntoCustomObjectAction");
 

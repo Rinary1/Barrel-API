@@ -1,0 +1,12 @@
+Sandbox_RU = {
+    Sandbox_BarrelAPI = "Barrel API",
+
+    Sandbox_BarrelAPI_BarrelMaxCapacity = "Максимальная вместительность топлива в бочке",
+    Sandbox_BarrelAPI_BarrelMaxCapacity_tooltip = "Максимальное количество топлива, которое в себя может вместить бочка.",
+
+    Sandbox_BarrelAPI_BarrelCanPickupFull = "Возможность поднятия бочки с бензином",
+    Sandbox_BarrelAPI_BarrelCanPickupFull_tooltip = "Позволяет поднимать бочки в которых находится бензин.",
+
+    Sandbox_BarrelAPI_BarrelRandomQuantityPercent = "Случайное начальное количество бензина в бочке (%)",
+    Sandbox_BarrelAPI_BarrelRandomQuantityPercent_tooltip = "Процент начального количества бензина, который вы можете найти в бочках.",
+}

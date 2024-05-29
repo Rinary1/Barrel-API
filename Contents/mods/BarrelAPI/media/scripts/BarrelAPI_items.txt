@@ -1,4 +1,4 @@
-module FuelAPI {
+module BarrelAPI {
 
     imports {
         Base,

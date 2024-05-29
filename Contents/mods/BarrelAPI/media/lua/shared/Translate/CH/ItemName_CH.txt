@@ -1,0 +1,5 @@
+ItemName_CH = {
+    ItemName_BarrelAPI.LargePetrolCan = "空的大型油罐",
+    ItemName_BarrelAPI.LargePetrolCanFull = "大型油罐",
+    ItemName_BarrelAPI.LargePetrolCanWater = "裝有水的大型油罐",
+}
